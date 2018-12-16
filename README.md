@@ -2,14 +2,22 @@
 Popcorn Time Docker Configuration
 
 Goals: Contain Popcorn Time (PCT) for Security Isolation
+
        Ensure PTC traffic is encapsulated in a VPN tunnel
+       
        Ideally a persistent PTC DB
+       
        Hardened container
 
 Implimentation Ideas:
+
        NordVPN
+       
        Xorg Window
        
+       
+       
+@TODO Ubuntu Base  https://docs.docker.com/install/linux/docker-ce/ubuntu/
 
 @TODO Install Popcorn-Time https://github.com/jerivasuaq/popcorntime
 
