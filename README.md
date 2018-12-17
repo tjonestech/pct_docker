@@ -36,3 +36,8 @@ Implimentation Ideas:
 @TODO Harden no_new_priv
 
 @TODO Meta Data https://docs.docker.com/config/labels-custom-metadata/#manage-labels-on-objects
+
+@TODO Desktop Icon for Launch
+
+       sudo wget -qO /opt/popcorn-time/popcorntime.png goo.gl/wz8ifr
+       
