@@ -1,0 +1,109 @@
+services:
+    node:
+        build: .
+        container_name: node
+        environment:
+            - DISPLAY
+        volumes:
+            - /tmp/.X11-unix:/tmp/.X11-unix
+
+----------------------------------------------------------------------
+version: '3.4'
+
+services:
+  vpn:
+    image: dperson/openvpn-client
+    # cap_add, security_opt, and volume required for the image to function
+    cap_add:
+      - net_admin
+    environment:
+      TZ: 'EST5EDT'
+    networks:
+      - default
+    read_only: true
+    tmpfs:
+      - /run
+      - /tmp
+    restart: unless-stopped
+    security_opt:
+      - label:disable
+    stdin_open: true
+    tty: true
+    volumes:
+      - /dev/net:/dev/net:z
+    # Put .ovpn configuration file in the /vpn directory (in "volumes:" above or
+    # launch using the command line arguments, IE pick one:
+    #  - ./vpn:/vpn
+    # command: 'server;user;password[;port]'
+
+  # Replace "service1" with and image with an actual service you want to run
+  service1:
+    image: docker_hub_user/container_name
+    depends_on:
+      - vpn
+    environment:
+      TZ: 'EST5EDT'
+    network_mode: "service:vpn"
+    restart: unless-stopped
+    stdin_open: true
+    tty: true
+    volumes:
+      - /srv/service1:/var/lib/service1:Z
+
+  web:
+    image: dperson/nginx
+    depends_on:
+      - service1
+    environment:
+      TZ: 'EST5EDT'
+    links:
+      - vpn:service1
+    networks:
+      - default
+    ports:
+      - "80:80"
+      - "443:443"
+    read_only: true
+    tmpfs:
+      - /run
+      - /tmp
+      - /var/cache/nginx
+    restart: unless-stopped
+    stdin_open: true
+    tty: true
+    command: -w "http://service1:8888;/service1"
+    # service1 shares the network stack of vpn. The service can by reached using
+    # the name of the service as a hostname.
+
+networks:
+  default:
+
+
+
+
+
+----------------------------------------------------------------
+
+version: '3'
+
+services:
+  application:
+    image: xxxxxxxxxxxxxxxxx
+    ports:
+      - "9999999:99999999"
+    links:
+      - x11
+    networks: 
+      - backend
+  x11:
+    image: zzzzzzzzzzzzzzzzzzz
+    ports:
+      - "111111111:111111111111"
+    volumes:
+      - ./data:/data/db
+    networks: 
+      - backend
+networks:
+  backend:
+    image: vvvvvvvvvvvvvvvvvvv
+    driver: "bridge"
