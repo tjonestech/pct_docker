@@ -31,6 +31,8 @@ Implimentation Ideas:
 
 @TODO Harden ports
 
+@TODO Harden docker https://www.digitalocean.com/community/tutorials/how-to-audit-docker-host-security-with-docker-bench-for-security-on-ubuntu-16-04
+
 @TODO Harden SELinux/AppArmor profiles
 
 @TODO Harden no_new_priv
