@@ -13,7 +13,7 @@ Implimentation Ideas:
 
        NordVPN
        
-       Xorg Window
+       Xorg Window (What's faster/better looking?)
        
        
        
@@ -35,7 +35,11 @@ Implimentation Ideas:
 
 @TODO Harden no_new_priv
 
+@TODO Harden Vault
+
 @TODO Meta Data https://docs.docker.com/config/labels-custom-metadata/#manage-labels-on-objects
+
+@TODO Pefromance Packer
 
 @TODO Desktop Icon for Launch
 
